@@ -1,0 +1,17 @@
+body {
+    background-color: orange;
+}
+.sports {
+    margin: 5px;
+    padding: 10px;
+    background-color: #ff0000;
+    border-radius: 15px;
+}
+#form {
+    margin-right: 25px;
+    text-align: center;
+}
+#searchButton {
+    background-color: #ff0000;
+    border-radius: 15px;
+}
