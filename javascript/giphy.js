@@ -30,24 +30,36 @@ $(document).ready(function() {
             method: "GET"
         }).done(function(response) {
             var results = response.data;
+
             for (var i = 0; i < results.length; i++) {
                 var giphyDiv = $("<div class='item'>");
                 var rating = results[i].rating;
                 var p = $("<p>").text("Rating: " + rating);
                 var sportImage = $("<img>").addClass("soloGif");
-                sportImage.attr("src", results[i].images.fixed_height_still.url);
-                sportImage.attr({
-                    "data-state": "animate"
-                });
-                sportImage.attr({
-                    "data-animate": results[i].images.fixed_height.url
-                });
-                sportImage.attr({
-                    "data-state": "still"
-                });
-                sportImage.attr({
+
+
+                var still = sportImage.attr("src", results[i].images.fixed_height_still.url);
+                var animate = sportImage.attr("src", results[i].images.fixed_height.url);
+/*                sportImage.attr({
                     "data-still": results[i].images.fixed_height_still.url
                 });
+*/
+                
+/*                sportImage.attr({
+                    "data-state": "still"
+                });
+*/
+
+/*                var animate = sportImage.attr("src", results[i].images.fixed_height.url);
+              sportImage.attr({
+                    "data-animate": results[i].images.fixed_height.url
+                });
+*/                
+
+               sportImage.attr({
+                    "data-state": "animate"
+                });
+                
                 giphyDiv.prepend(sportImage);
                 giphyDiv.prepend(p);
                 $("#sport-gifs-here").prepend(giphyDiv);
@@ -58,13 +70,12 @@ $(document).ready(function() {
     sportButtonClick();
 
 //click any still gif and it will animate. else if it is animating it will become still
-    $(".soloGif").click(function() {
-        var state = $(this).attr('data-state');
-        if (state == "still") {
+    $("#sport-gifs-here").on("click", ".item", function() {
+        var state = $(this).attr("data-state");
+        if (state === "still") {
             $(this).attr("src", $(this).attr("data-animate"));
             $(this).attr("data-state", "animate");
-        } 
-        else {
+        } else {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-state", "still");
         }
