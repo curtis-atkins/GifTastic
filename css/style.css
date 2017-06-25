@@ -4,7 +4,7 @@ body {
 .sports {
     margin: 5px;
     padding: 10px;
-    background-color: #ff0000;
+    background-color: white;
     border-radius: 15px;
 }
 #form {
@@ -12,6 +12,10 @@ body {
     text-align: center;
 }
 #searchButton {
-    background-color: #ff0000;
+    background-color: white;
     border-radius: 15px;
+}
+
+#buttons{
+    background-color:red;
 }
