@@ -31,15 +31,17 @@ $(document).ready(function() {
         }).done(function(response) {
             var results = response.data;
 
+//            var still = results[i].images.fixed_height_still.url;
+//            var animate = results[i].images.fixed_height.url;
+
+
             for (var i = 0; i < results.length; i++) {
                 var giphyDiv = $("<div class='item'>");
                 var rating = results[i].rating;
                 var p = $("<p>").text("Rating: " + rating);
                 var sportImage = $("<img>").addClass("soloGif");
-
-
-                var still = sportImage.attr("src", results[i].images.fixed_height_still.url);
-                var animate = sportImage.attr("src", results[i].images.fixed_height.url);
+sportImage.attr("src", results[i].images.fixed_height_still.url);
+sportImage.attr("src", results[i].images.fixed_height.url);
 /*                sportImage.attr({
                     "data-still": results[i].images.fixed_height_still.url
                 });
