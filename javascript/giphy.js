@@ -22,67 +22,72 @@ $(document).ready(function() {
 //when button is clicked return 10 hits from giphy search search including still gif and rating
     function sportButtonClick(){
         $(".sports").click(function() {
-        var sport = $(this).attr("data-name");
-        var apiKey = "45657ac5520149fb807bcf8f97c84b60";
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + sport + "&api_key=" + apiKey + "&limit=10";
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).done(function(response) {
-            var results = response.data;
+            var sport = $(this).attr("data-name");
+            var apiKey = "45657ac5520149fb807bcf8f97c84b60";
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + sport + "&api_key=" + apiKey + "&limit=10";
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).done(function(response) {
+                var results = response.data;
+                console.log(results);
 
-//            var still = results[i].images.fixed_height_still.url;
-//            var animate = results[i].images.fixed_height.url;
+    //            var still = results[i].images.fixed_height_still.url;
+    //            var animate = results[i].images.fixed_height.url;
 
 
-            for (var i = 0; i < results.length; i++) {
-                var giphyDiv = $("<div class='item'>");
-                var rating = results[i].rating;
-                var p = $("<p>").text("Rating: " + rating);
-                var sportImage = $("<img>").addClass("soloGif");
-sportImage.attr("src", results[i].images.fixed_height_still.url);
-sportImage.attr("src", results[i].images.fixed_height.url);
-/*                sportImage.attr({
-                    "data-still": results[i].images.fixed_height_still.url
+                for (var i = 0; i < results.length; i++) {
+                    var giphyDiv = $("<div class='item'>");
+                    var rating = results[i].rating;
+                    var p = $("<p>").text("Rating: " + rating);
+                    var sportImage = $("<img>").addClass("soloGif");
+                    sportImage.attr("src", results[i].images.fixed_height.url);
+                    sportImage.attr({
+                        "data-still": results[i].images.fixed_height_still.url
+                    });
+
+                    
+
+
+                  sportImage.attr({
+                        "data-animate": results[i].images.fixed_height.url
+                    });
+                    
+
+                   sportImage.attr({
+                        "data-state": "animate"
+                    });
+                    
+                    giphyDiv.prepend(sportImage);
+                    giphyDiv.prepend(p);
+                    $("#sport-gifs-here").prepend(giphyDiv);
+                };
+                console.log("each");
+                $(".soloGif").each(function () {
+                    still2Animate(this);
                 });
-*/
-                
-/*                sportImage.attr({
-                    "data-state": "still"
+                console.log("click");
+                $(".soloGif").click(function () {
+                    still2Animate(this);
                 });
-*/
-
-/*                var animate = sportImage.attr("src", results[i].images.fixed_height.url);
-              sportImage.attr({
-                    "data-animate": results[i].images.fixed_height.url
-                });
-*/                
-
-               sportImage.attr({
-                    "data-state": "animate"
-                });
-                
-                giphyDiv.prepend(sportImage);
-                giphyDiv.prepend(p);
-                $("#sport-gifs-here").prepend(giphyDiv);
-            };
+            });
         });
-    });
     };
     sportButtonClick();
 
-//click any still gif and it will animate. else if it is animating it will become still
-    $("#sport-gifs-here").on("click", ".item", function() {
-        var state = $(this).attr("data-state");
-        if (state === "still") {
-            $(this).attr("src", $(this).attr("data-animate"));
-            $(this).attr("data-state", "animate");
-        } else {
-            $(this).attr("src", $(this).attr("data-still"));
-            $(this).attr("data-state", "still");
-        }
-    });
-
+    function still2Animate(obj){
+                    console.log("What is this?");
+                    console.log(obj);
+                    var state = $(obj).attr("data-state");
+                    console.log(state);
+                    if (state === "still") {
+                        $(obj).attr("src", $(obj).attr("data-animate"));
+                        $(obj).attr("data-state", "animate");
+                    } else {
+                        $(obj).attr("src", $(obj).attr("data-still"));
+                        $(obj).attr("data-state", "still");
+                    }
+                };
 //when there is a value in the input field, once you click submit, the value will be placed at the  
 //top in a new button which can be clicked and will return 10 results with a still gif and rating
     $("#searchButton").click(function(){
