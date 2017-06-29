@@ -32,10 +32,8 @@ $(document).ready(function() {
                 var results = response.data;
                 console.log(results);
 
-    //            var still = results[i].images.fixed_height_still.url;
-    //            var animate = results[i].images.fixed_height.url;
-
-
+                // your gifs are stacking up and not clearing on clicking a new item
+                $("#sport-gifs-here").empty();
                 for (var i = 0; i < results.length; i++) {
                     var giphyDiv = $("<div class='item'>");
                     var rating = results[i].rating;
@@ -45,19 +43,12 @@ $(document).ready(function() {
                     sportImage.attr({
                         "data-still": results[i].images.fixed_height_still.url
                     });
-
-                    
-
-
-                  sportImage.attr({
+                    sportImage.attr({
                         "data-animate": results[i].images.fixed_height.url
                     });
-                    
-
-                   sportImage.attr({
+                    sportImage.attr({
                         "data-state": "animate"
                     });
-                    
                     giphyDiv.prepend(sportImage);
                     giphyDiv.prepend(p);
                     $("#sport-gifs-here").prepend(giphyDiv);
@@ -76,18 +67,18 @@ $(document).ready(function() {
     sportButtonClick();
 
     function still2Animate(obj){
-                    console.log("What is this?");
-                    console.log(obj);
-                    var state = $(obj).attr("data-state");
-                    console.log(state);
-                    if (state === "still") {
-                        $(obj).attr("src", $(obj).attr("data-animate"));
-                        $(obj).attr("data-state", "animate");
-                    } else {
-                        $(obj).attr("src", $(obj).attr("data-still"));
-                        $(obj).attr("data-state", "still");
-                    }
-                };
+        console.log("What is this?");
+        console.log(obj);
+        var state = $(obj).attr("data-state");
+        console.log(state);
+        if (state === "still") {
+            $(obj).attr("src", $(obj).attr("data-animate"));
+            $(obj).attr("data-state", "animate");
+        } else {
+            $(obj).attr("src", $(obj).attr("data-still"));
+            $(obj).attr("data-state", "still");
+        }
+    };
 //when there is a value in the input field, once you click submit, the value will be placed at the  
 //top in a new button which can be clicked and will return 10 results with a still gif and rating
     $("#searchButton").click(function(){
@@ -97,13 +88,7 @@ $(document).ready(function() {
        sportButtonClick();
 //each time the submit button is clicked, clear the text input field
        $("#form").each(function(){
-    this.reset();
-});
+          this.reset();
+       });
     });
-
-
-
-
-
-
 });
